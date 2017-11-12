@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_light"
+    android:paddingTop="@dimen/heroes_margin_half"
+    android:paddingBottom="@dimen/heroes_margin_half">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background_card"
+        android:layout_marginStart="@dimen/heroes_margin_half"
+        android:layout_marginEnd="@dimen/heroes_margin_half"
+        android:layout_marginBottom="@dimen/heroes_margin_half">
+
+        <EditText
+            android:id="@+id/editText3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Search"
+            android:inputType="textPersonName"
+            android:layout_marginStart="@dimen/heroes_margin_half"
+            android:layout_marginEnd="@dimen/heroes_margin_half" />
+    </RelativeLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Heroes At Work</string>
+    <string name="_"></string>
+    <string name="heroes">Heroes</string>
+    <string name="started_on">Started on</string>
+    <string name="ends_on">Ends on</string>
+    <string name="main_hero">Main Hero</string>
+    <string name="played_points">Played Points</string>
+</resources>

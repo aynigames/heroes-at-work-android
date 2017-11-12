@@ -1,0 +1,74 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "com.ayni.heroesatwork"
+        minSdkVersion 21
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "com.android.support:appcompat-v7:$appCompatVersion"
+    testImplementation "junit:junit:4.12"
+    androidTestImplementation "com.android.support.test:runner:1.0.1"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:3.0.1"
+
+    //Architecture Components
+    compile "android.arch.lifecycle:runtime:$archComponentsVersion"
+    compile "android.arch.lifecycle:extensions:$archComponentsVersion"
+    annotationProcessor "android.arch.lifecycle:compiler:$archComponentsVersion"
+
+    compile "android.arch.persistence.room:runtime:$archComponentsVersion"
+    compile "android.arch.persistence.room:rxjava2:$archComponentsVersion"
+    annotationProcessor "android.arch.persistence.room:compiler:$archComponentsVersion"
+    kapt "android.arch.persistence.room:compiler:$archComponentsVersion"
+
+
+    //Dagger
+    compile "com.google.dagger:dagger:$daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+
+    //Retrofit, RxJava, Picasso and OkHttp
+    compile "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    compile "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    compile "com.squareup.okhttp3:okhttp:$okHttpVersion"
+    compile "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+    compile "io.reactivex.rxjava2:rxjava:$rxjavaVersion"
+    compile "io.reactivex.rxjava2:rxandroid:$rxjavaVersion"
+    compile "com.squareup.picasso:picasso:$picassoVersion"
+    compile "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
+
+    //ButterKnife
+    compile "com.jakewharton:butterknife:$butterknifeVersion"
+    kapt "com.jakewharton:butterknife-compiler:$butterknifeVersion"
+
+    //Gson
+    compile group: "com.google.code.gson", name: "gson", version: "$gsonVersion"
+
+    //AppCompat
+    compile "com.android.support:appcompat-v7:$appCompatVersion"
+    compile "com.android.support:design:$appCompatVersion"
+    implementation "com.android.support:recyclerview-v7:$appCompatVersion"
+
+    //ProgressBar
+    compile "com.akexorcist:RoundCornerProgressBar:2.0.3"
+
+}

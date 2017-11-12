@@ -1,0 +1,54 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ayni.heroesatwork">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme.Light">
+
+
+        <activity
+            android:name=".views.activities.GameCreateActivity"
+            android:label="@string/app_name">
+        </activity>
+        <activity
+            android:name=".views.activities.GameDetailActivity"
+            android:label="@string/app_name">
+        </activity>
+        <activity
+            android:name=".views.activities.GameHistoryActivity"
+            android:label="@string/app_name">
+        </activity>
+        <activity
+            android:name=".views.activities.GameListActivity"
+            android:label="Games">
+        </activity>
+        <activity
+            android:name=".views.activities.GamePointsActivity"
+            android:label="My Score">
+        </activity>
+        <activity
+            android:name=".views.activities.GameVoteActivity"
+            android:label="@string/app_name">
+        </activity>
+        <activity
+            android:name=".views.activities.HeroSearchActivity"
+            android:label="Heroes">
+        </activity>
+        <activity android:name=".views.activities.LoginActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".views.activities.NotificationListActivity"
+            android:label="@string/app_name">
+        </activity>
+    </application>
+</manifest>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_dark">
+
+    <ImageView
+        android:id="@+id/logo_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/ic_launcher_round"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/heroes_margin_triple"/>
+
+    <Button
+        android:id="@+id/login_facebook_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/logo_image"
+        android:layout_marginBottom="@dimen/heroes_margin_double"
+        android:layout_marginEnd="@dimen/heroes_margin_double"
+        android:layout_marginStart="@dimen/heroes_margin_double"
+        android:layout_marginTop="@dimen/heroes_margin_double"
+        android:background="@color/facebook_blue"
+        android:text="Login with Facebook"
+        android:textColor="@color/heroes_white" />
+
+    <EditText
+        android:id="@+id/email_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login_facebook_button"
+        android:layout_marginEnd="@dimen/heroes_margin_double"
+        android:layout_marginStart="@dimen/heroes_margin_double"
+        android:backgroundTint="@color/heroes_white"
+        android:ems="10"
+        android:gravity="center_horizontal"
+        android:hint="email"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/heroes_white"
+        android:textColorHint="@color/heroes_white" />
+
+    <EditText
+        android:id="@+id/password_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/email_edit"
+        android:layout_marginEnd="@dimen/heroes_margin_double"
+        android:layout_marginStart="@dimen/heroes_margin_double"
+        android:backgroundTint="@color/heroes_white"
+        android:ems="10"
+        android:gravity="center_horizontal"
+        android:hint="password"
+        android:textColor="@color/heroes_white"
+        android:inputType="textPassword"
+        android:textColorHint="@color/heroes_white" />
+
+    <Button
+        android:id="@+id/login_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/password_edit"
+        android:layout_marginEnd="@dimen/heroes_margin_double"
+        android:layout_marginStart="@dimen/heroes_margin_double"
+        android:background="@color/action_accept_background"
+        android:text="Login"
+        android:textColor="@color/action_accept_text" />
+
+    <Button
+        android:id="@+id/create_account_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/heroes_margin"
+        android:layout_marginEnd="@dimen/heroes_margin_double"
+        android:layout_marginStart="@dimen/heroes_margin_double"
+        android:background="@color/action_accept_background"
+        android:text="Create account"
+        android:textColor="@color/action_accept_text" />
+</RelativeLayout>

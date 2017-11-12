@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="zero">0dp</dimen>
+
+    <dimen name="heroes_margin_quarter">4dp</dimen>
+    <dimen name="heroes_margin_half">8dp</dimen>
+    <dimen name="heroes_margin">16dp</dimen>
+    <dimen name="heroes_margin_double">32dp</dimen>
+    <dimen name="heroes_margin_triple">48dp</dimen>
+
+
+    <dimen name="heroes_margin_quarter_minus">-4dp</dimen>
+    <dimen name="heroes_margin_half_minus">-8dp</dimen>
+    <dimen name="heroes_margin_minus">-16dp</dimen>
+    <dimen name="heroes_margin_double_minus">-32dp</dimen>
+    <dimen name="heroes_margin_triple_minus">-48dp</dimen>
+
+    <dimen name="heroes_current_game_width">250dp</dimen>
+</resources>

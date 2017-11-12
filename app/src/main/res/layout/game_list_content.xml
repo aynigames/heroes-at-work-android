@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background_light"
+        android:paddingTop="@dimen/heroes_margin"
+        android:paddingBottom="@dimen/heroes_margin">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="In Progress"
+            android:textColor="@color/title_light"
+            android:layout_marginStart="@dimen/heroes_margin"
+            android:layout_marginEnd="@dimen/heroes_margin"
+            android:textAppearance="@android:style/TextAppearance.Material.Large" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/current_games_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/heroes_margin"
+            android:layout_marginBottom="@dimen/heroes_margin"
+            android:layout_marginStart="@dimen/heroes_margin_half"
+            android:layout_marginEnd="@dimen/heroes_margin_half"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="History"
+            android:layout_marginTop="@dimen/heroes_margin"
+            android:layout_marginStart="@dimen/heroes_margin"
+            android:layout_marginEnd="@dimen/heroes_margin"
+            android:textColor="@color/title_light"
+            android:textAppearance="@android:style/TextAppearance.Material.Large" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/old_games_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/heroes_margin_half"
+            android:layout_marginBottom="@dimen/heroes_margin"
+            android:layout_marginStart="@dimen/heroes_margin"
+            android:layout_marginEnd="@dimen/heroes_margin"/>
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

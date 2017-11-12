@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">@color/heroes_blue</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="facebook_blue">#2579F5</color>
+    <color name="heroes_blue">#3E3880</color>
+    <color name="heroes_green">#00D977</color>
+    <color name="heroes_red">#FF4D7A</color>
+    <color name="heroes_light_gray">#E5E5E5</color>
+    <color name="heroes_gray">#B5B5B5</color>
+    <color name="heroes_dark_gray">#696969</color>
+    <color name="heroes_white">#FFFFFF</color>
+
+
+    <color name="action_bar_light"></color>
+    <color name="background_dark">@color/heroes_blue</color>
+    <color name="background_light">@color/heroes_light_gray</color>
+    <color name="background_card">@color/heroes_white</color>
+    <color name="title_light">@color/heroes_dark_gray</color>
+    <color name="text_light">@color/heroes_gray</color>
+    <color name="action_accept_background">@color/heroes_green</color>
+    <color name="action_cancel_background">@color/heroes_red</color>
+    <color name="action_accept_text">@color/heroes_white</color>
+
+</resources>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background_light"
+    android:paddingTop="@dimen/heroes_margin"
+    android:paddingBottom="@dimen/heroes_margin">
+
+    <RelativeLayout
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/score_view"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="@dimen/heroes_margin_half"
+        android:background="@drawable/circle_background_green">
+
+        <TextView
+            android:id="@+id/current_score_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/heroes_margin"
+            android:text="180"
+            android:textSize="40sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/current_score_text"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-8dp"
+            android:text="points" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/title_light"
+        android:layout_margin="@dimen/heroes_margin"
+        android:text="Points given by"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium" />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_marginStart="@dimen/heroes_margin"
+        android:layout_marginEnd="@dimen/heroes_margin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>
