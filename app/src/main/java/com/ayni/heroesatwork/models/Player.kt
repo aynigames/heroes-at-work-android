@@ -1,13 +1,14 @@
 package com.ayni.heroesatwork.models
 
-import java.util.*
-
 data class Player(
-        var PlayerId: Int,
-        var GameId: Int,
-        var MemberId: Int,
-        var PlayerName: String,
-        var PlayerLastName: String,
-        var PlayerAvatar: String,
-        var PlayerEmail: String,
-        var Players: List<Player>)
+        var playerId: Int,
+        var gameId: Int,
+        var memberId: Int,
+        var playerName: String,
+        var playerLastName: String,
+        var playerAvatar: String,
+        var playerEmail: String,
+        var playerScore: Float,
+        var giverScore: Float)
+
+

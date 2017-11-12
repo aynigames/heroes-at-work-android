@@ -9,15 +9,18 @@ import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.ayni.heroesatwork.R
+import com.ayni.heroesatwork.application.DateUtils
+import com.ayni.heroesatwork.application.HeroesAtWorkConstants
 import com.ayni.heroesatwork.application.inflate
 import com.ayni.heroesatwork.application.launchActivity
 import com.ayni.heroesatwork.models.Game
 import com.ayni.heroesatwork.views.activities.GameDetailActivity
+import java.text.SimpleDateFormat
 import java.util.*
 
 class CurrentGamesAdapter (var mDataset: List<Game>?): RecyclerView.Adapter<CurrentGamesAdapter.CurrentGameViewHolder>() {
 
-    class CurrentGameViewHolder : RecyclerView.ViewHolder {
+    class CurrentGameViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         @BindView((R.id.game_name_text))
         lateinit var nameTextView: TextView
@@ -25,27 +28,29 @@ class CurrentGamesAdapter (var mDataset: List<Game>?): RecyclerView.Adapter<Curr
         @BindView(R.id.game_remaining_days_text)
         lateinit var remainingDaysTextView: TextView
 
-        constructor(itemView: View): super(itemView) {
-            ButterKnife.bind(this, itemView)
-        }
-
         fun bind(game: Game, listener: (Context, Game) -> Unit) = with(itemView) {
             nameTextView.text = game.name
-            var today = Date()
-            var diff = (game.endedOn!!.time - today.time) / (24 * 60 * 60 * 1000)
-            if (diff < 0)
-                remainingDaysTextView.text = "Just Finished"
-            else if (diff == 0L)
-                remainingDaysTextView.text = "Finishes today"
-            else if (diff == 1L)
-                remainingDaysTextView.text = "Finishes tomorrow"
-            else
-                remainingDaysTextView.text = "Finishes in $diff days"
+
+            val today = DateUtils.getStartOfDay(Date())
+            val endDateSetting = game.getSetting(HeroesAtWorkConstants.SETTING_END_DATE)
+            val endDate = SimpleDateFormat(HeroesAtWorkConstants.DATE_FORMAT).parse(endDateSetting!!.value)
+
+            val diff = (endDate.time - today.time) / (24 * 60 * 60 * 1000)
+            when {
+                diff < 0 -> remainingDaysTextView.text = context.getString(R.string.just_finished)
+                diff == 0L -> remainingDaysTextView.text = context.getString(R.string.finishes_today)
+                diff == 1L -> remainingDaysTextView.text = context.getString(R.string.finishes_tomorrow)
+                else -> remainingDaysTextView.text = String.format(context.getString(R.string.finishes_in_x_days), diff)
+            }
 
             //TODO: Heroes faces
 
 
             itemView.setOnClickListener { listener(context, game) }
+        }
+
+        init {
+            ButterKnife.bind(this, itemView)
         }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =

@@ -13,4 +13,19 @@ data class Game(
         var createdOn: Date,
         var startedOn: Date,
         var endedOn: Date,
-        var players: List<Player>)
+        var players: List<Player>,
+        var settings: List<Setting>,
+        var leaderBoard: LeaderBoard) {
+
+    fun getSetting(key: String): Setting? {
+        return settings.find { setting -> setting.key == key }
+    }
+
+    fun getPlayer(memberId: Int): Player? {
+        return leaderBoard.players.find { player -> player.memberId == memberId }
+    }
+
+    fun getTopPlayer(): Player? {
+        return leaderBoard.players.maxBy { player -> player.playerScore }
+    }
+}
