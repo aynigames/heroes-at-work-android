@@ -1,6 +1,8 @@
 package com.ayni.heroesatwork.models
 
-data class Player(
+import java.io.Serializable
+
+data class Player (
         var playerId: Int,
         var gameId: Int,
         var memberId: Int,

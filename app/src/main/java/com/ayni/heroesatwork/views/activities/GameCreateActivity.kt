@@ -1,7 +1,7 @@
 package com.ayni.heroesatwork.views.activities
 
 import android.content.DialogInterface
-import android.graphics.drawable.GradientDrawable
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
@@ -17,6 +17,7 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
 import com.ayni.heroesatwork.R
+import com.ayni.heroesatwork.application.HeroesAtWorkConstants
 import com.ayni.heroesatwork.application.hideSoftKeyboard
 import com.ayni.heroesatwork.application.launchActivity
 import com.ayni.heroesatwork.models.Game
@@ -27,6 +28,7 @@ import com.ayni.heroesatwork.views.listeners.OnHeroDeletedListener
 import com.ayni.heroesatwork.views.listeners.OnTagDeletedListener
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
+import com.google.gson.Gson
 
 
 class GameCreateActivity : AppCompatActivity(), OnTagDeletedListener, OnHeroDeletedListener {
@@ -46,8 +48,8 @@ class GameCreateActivity : AppCompatActivity(), OnTagDeletedListener, OnHeroDele
     @BindView(R.id.heroes_recycler_view)
     lateinit var mHeroesRecyclerView: RecyclerView
 
-    var mTagList = mutableListOf<String>()
-    var mHeroList = mutableListOf<Player>()
+    private var mTagList = mutableListOf<String>()
+    private var mHeroList = mutableListOf<Player>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,8 +65,8 @@ class GameCreateActivity : AppCompatActivity(), OnTagDeletedListener, OnHeroDele
         mTagsRecyclerView.adapter = TagsAdapter(mTagList, this@GameCreateActivity)
 
         mHeroesRecyclerView.setHasFixedSize(true)
-        mHeroesRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        mHeroesRecyclerView.adapter = HeroesAdapter(mHeroList, this@GameCreateActivity)
+        mHeroesRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        mHeroesRecyclerView.adapter = HeroesAdapter(mHeroList, this@GameCreateActivity, null)
 
         mGamePointsSeekBar.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
@@ -81,7 +83,7 @@ class GameCreateActivity : AppCompatActivity(), OnTagDeletedListener, OnHeroDele
 
     @OnClick(R.id.hero_add_button)
     internal fun onHeroAddClick() {
-        launchActivity<HeroSearchActivity> {  }
+        launchActivity<HeroSearchActivity>(HeroesAtWorkConstants.HERO_SEARCH_REQUEST_CODE) {  }
     }
 
     @OnClick(R.id.game_create_button)
@@ -107,7 +109,7 @@ class GameCreateActivity : AppCompatActivity(), OnTagDeletedListener, OnHeroDele
         input.setSingleLine()
         val container = FrameLayout(this@GameCreateActivity)
         val params = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-        val marginSize = getResources().getDimensionPixelSize(R.dimen.heroes_margin)
+        val marginSize = resources.getDimensionPixelSize(R.dimen.heroes_margin)
         params.leftMargin = marginSize
         params.rightMargin = marginSize
         params.topMargin = marginSize
@@ -115,37 +117,32 @@ class GameCreateActivity : AppCompatActivity(), OnTagDeletedListener, OnHeroDele
 
         input.layoutParams = params
         container.addView(input)
-        alertDialog.setTitle("Add Tag")
-        alertDialog.setView(container)
-        alertDialog.setPositiveButton("YES",
-                object: DialogInterface.OnClickListener {
-                    override fun onClick(dialog: DialogInterface?, which: Int) {
-                        val tag = input.getText().toString();
-                        if (tag == "") {
-                            Toast.makeText(this@GameCreateActivity, "Tag cannot be empty", Toast.LENGTH_LONG).show()
-                            return
-                        }
-                        if (mTagList.any { t -> t.equals(tag, ignoreCase = true) }) {
-                            Toast.makeText(this@GameCreateActivity, "Tag already added", Toast.LENGTH_LONG).show()
-                            return
-                        }
-                        mTagList.add(tag)
-                        mTagsRecyclerView.adapter.notifyDataSetChanged()
-                        dialog!!.cancel()
-                        this@GameCreateActivity.hideSoftKeyboard()
+        with(alertDialog) {
+            setTitle("Add Tag")
+            setView(container)
+            setPositiveButton("YES",
+                DialogInterface.OnClickListener { dialog, _ ->
+                    val tag = input.text.toString()
+                    if (tag == "") {
+                        Toast.makeText(this@GameCreateActivity, "Tag cannot be empty", Toast.LENGTH_LONG).show()
+                        return@OnClickListener
                     }
+                    if (mTagList.any { t -> t.equals(tag, ignoreCase = true) }) {
+                        Toast.makeText(this@GameCreateActivity, "Tag already added", Toast.LENGTH_LONG).show()
+                        return@OnClickListener
+                    }
+                    mTagList.add(tag)
+                    mTagsRecyclerView.adapter.notifyDataSetChanged()
+                    dialog!!.cancel()
+                    this@GameCreateActivity.hideSoftKeyboard()
                 })
+            setNegativeButton("NO"
+            ) { dialog, _ ->
+                dialog?.cancel()
+            }
+        }
 
-        alertDialog.setNegativeButton("NO",
-                object: DialogInterface.OnClickListener {
-                    override fun onClick(dialog:DialogInterface?, which: Int) {
-                        if (dialog != null) {
-                            dialog.cancel()
-                        }
-                    }
-                });
-
-        alertDialog.show();
+        alertDialog.show()
     }
 
     override fun onTagDeleted(tag: String) {
@@ -156,6 +153,21 @@ class GameCreateActivity : AppCompatActivity(), OnTagDeletedListener, OnHeroDele
     override fun onHeroDeleted(hero: Player) {
         mHeroList.remove(hero)
         mHeroesRecyclerView.adapter.notifyDataSetChanged()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == HeroesAtWorkConstants.HERO_SEARCH_REQUEST_CODE) {
+            val bundle = data!!.getBundleExtra(HeroesAtWorkConstants.HERO_SELECTED_BUNDLE_KEY)
+            val heroJson = bundle.getString(HeroesAtWorkConstants.HERO_SELECTED_BUNDLE_KEY)
+            val hero = Gson().fromJson<Player>(heroJson, Player::class.java)
+            if (mHeroList.any { h -> h.memberId == hero.memberId }) {
+                Toast.makeText(this@GameCreateActivity, "Hero already added", Toast.LENGTH_LONG).show()
+                return
+            }
+            mHeroList.add(hero)
+            mHeroesRecyclerView.adapter.notifyDataSetChanged()
+        }
     }
 
 }

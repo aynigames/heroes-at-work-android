@@ -17,7 +17,7 @@ class MockEntities {
         val dummyProfilePic = "http://www.tripurainfo.com/Matrimonials/Photos/DummyWoman.jpg"
         val player1 = Player(1, 1, 1, "Miguel", "Koo", dummyProfilePic, "miguel@aynilab.com", 120.0f, 20.0f)
         val player2 = Player(2, 1, 2, "Paolo", "Quinteros", dummyProfilePic, "paolo@aynilab.com", 150.0f, 20.0f)
-        val player3 = Player(2, 1, 2, "Arturo", "Gamarra", dummyProfilePic, "arturo@aynilab.com", 20.0f, 20.0f)
+        val player3 = Player(3, 1, 3, "Arturo", "Gamarra", dummyProfilePic, "arturo@aynilab.com", 20.0f, 20.0f)
         val players = listOf(player1, player2, player3)
         val leaderBoard = LeaderBoard(players)
 

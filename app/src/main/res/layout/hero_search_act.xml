@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Search"
+            android:hint="@string/search"
             android:inputType="textPersonName"
             android:layout_marginStart="@dimen/heroes_margin_half"
             android:layout_marginEnd="@dimen/heroes_margin_half" />
@@ -29,5 +29,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/heroes_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/heroes_margin_half"
+        android:layout_marginEnd="@dimen/heroes_margin_half"/>
 </LinearLayout>

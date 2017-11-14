@@ -27,7 +27,7 @@ class CurrentGamesAdapter (private var mDataset: List<Game>): RecyclerView.Adapt
         @BindView(R.id.game_remaining_days_text)
         lateinit var remainingDaysTextView: TextView
 
-        fun bind(game: Game, listener: (Context, Game) -> Unit) = with(itemView) {
+        fun bind(game: Game) = with(itemView) {
             nameTextView.text = game.name
 
             val today = DateUtils.getStartOfDay(Date())
@@ -45,7 +45,7 @@ class CurrentGamesAdapter (private var mDataset: List<Game>): RecyclerView.Adapt
             //TODO: Heroes faces
 
 
-            itemView.setOnClickListener { listener(context, game) }
+            itemView.setOnClickListener { context.launchActivity<GameDetailActivity> {  } }
         }
 
         init {
@@ -56,7 +56,7 @@ class CurrentGamesAdapter (private var mDataset: List<Game>): RecyclerView.Adapt
             CurrentGameViewHolder(parent.inflate(R.layout.current_game_view))
 
     override fun onBindViewHolder(holder: CurrentGameViewHolder, position: Int) {
-        holder.bind(mDataset[position], listener)
+        holder.bind(mDataset[position])
     }
 
     override fun getItemCount(): Int = mDataset.size
@@ -65,11 +65,5 @@ class CurrentGamesAdapter (private var mDataset: List<Game>): RecyclerView.Adapt
     fun swap(newData: List<Game>) {
         mDataset = newData
         notifyDataSetChanged()
-    }
-
-    object listener : (Context, Game) -> Unit {
-        override fun invoke(context: Context, game: Game) {
-            context.launchActivity<GameDetailActivity> {  }
-        }
     }
 }
