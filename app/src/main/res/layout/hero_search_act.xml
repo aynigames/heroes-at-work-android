@@ -15,7 +15,7 @@
         android:layout_marginBottom="@dimen/heroes_margin_half">
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/hero_search_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -27,6 +27,7 @@
 
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/heroes_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

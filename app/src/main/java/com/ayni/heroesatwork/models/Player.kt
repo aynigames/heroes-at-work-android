@@ -9,6 +9,11 @@ data class Player(
         var playerAvatar: String,
         var playerEmail: String,
         var playerScore: Float,
-        var giverScore: Float)
+        var giverScore: Float) {
+
+    fun playerFullName() : String {
+        return playerName + " " + playerLastName
+    }
+}
 
 

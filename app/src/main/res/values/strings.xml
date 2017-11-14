@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Heroes At Work</string>
-    <string name="_"> </string>
+    <string name="_"></string>
+    <string name="concatenate">%1$s %2$s</string>
+
     <string name="heroes">Heroes</string>
     <string name="started_on">Started on</string>
     <string name="ends_on">Ends on</string>
@@ -10,6 +12,8 @@
     <string name="just_finished">Just finished</string>
     <string name="finishes_today">Finishes Today</string>
     <string name="finishes_tomorrow">Finishes Tomorrow</string>
-    <string name="finishes_in_x_days">"Finishes in %1$s days"</string>
+    <string name="finishes_in_x_days">Finishes in %1$s days</string>
+    <string name="create">Create!</string>
+    <string name="tags">Tags</string>
 
 </resources>

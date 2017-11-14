@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import java.util.*
 
 inline fun <reified T : Any> Activity.launchActivity(requestCode: Int = -1, options: Bundle? = null, noinline init: Intent.() -> Unit = {}) {
@@ -28,6 +29,20 @@ inline fun <reified T : Any> newIntent(context: Context): Intent =
 
 fun ViewGroup.inflate(layoutRes: Int): View {
     return LayoutInflater.from(context).inflate(layoutRes, this, false)
+}
+
+
+fun Activity.hideSoftKeyboard() {
+    if (getCurrentFocus() != null) {
+        val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0)
+    }
+}
+
+fun Activity.showSoftKeyboard(view: View) {
+    val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    view.requestFocus()
+    inputMethodManager.showSoftInput(view, 0)
 }
 
 

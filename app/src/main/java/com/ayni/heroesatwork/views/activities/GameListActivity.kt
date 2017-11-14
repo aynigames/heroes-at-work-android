@@ -46,9 +46,7 @@ class GameListActivity : AppCompatActivity() {
         mCurrentGamesRecyclerView.adapter = CurrentGamesAdapter(emptyList())
 
         mOldGamesRecyclerView.setHasFixedSize(true)
-
-        val mOldGamesLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        mOldGamesRecyclerView.layoutManager = mOldGamesLayoutManager
+        mOldGamesRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         mOldGamesRecyclerView.adapter = OldGamesAdapter(emptyList())
 
         fab.setOnClickListener { view ->

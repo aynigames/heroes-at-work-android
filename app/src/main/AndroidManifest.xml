@@ -13,7 +13,8 @@
 
         <activity
             android:name=".views.activities.GameCreateActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateHidden">
         </activity>
         <activity
             android:name=".views.activities.GameDetailActivity"

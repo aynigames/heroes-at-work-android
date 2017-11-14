@@ -2,7 +2,6 @@ package com.ayni.heroesatwork.views.adapters
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -19,7 +18,7 @@ import com.ayni.heroesatwork.models.Game
 import com.ayni.heroesatwork.views.activities.GameDetailActivity
 import java.text.SimpleDateFormat
 
-class OldGamesAdapter (var mDataset: List<Game>?): RecyclerView.Adapter<OldGamesAdapter.OldGameViewHolder>() {
+class OldGamesAdapter (private var mDataset: List<Game>): RecyclerView.Adapter<OldGamesAdapter.OldGameViewHolder>() {
 
     class OldGameViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -69,7 +68,7 @@ class OldGamesAdapter (var mDataset: List<Game>?): RecyclerView.Adapter<OldGames
 
             val mainHero = game.getTopPlayer()
             mainHeroPointsTextView.text = mainHero!!.playerScore.toString()
-            mainHeroNameTextView.text = "${mainHero.playerName} ${mainHero.playerLastName}"
+            mainHeroNameTextView.text = mainHero.playerFullName()
 
             //TODO: Main Hero Progress
             mainHeroPointsProgressBar.max = 100.0f
@@ -89,13 +88,13 @@ class OldGamesAdapter (var mDataset: List<Game>?): RecyclerView.Adapter<OldGames
             OldGameViewHolder(parent.inflate(R.layout.old_game_view))
 
     override fun onBindViewHolder(holder: OldGameViewHolder, position: Int) {
-        holder.bind(mDataset!![position], listener)
+        holder.bind(mDataset[position], listener)
     }
 
-    override fun getItemCount(): Int = if (mDataset != null) mDataset!!.size else 0
+    override fun getItemCount(): Int = mDataset.size
 
 
-    fun swap(newData: List<Game>?) {
+    fun swap(newData: List<Game>) {
         mDataset = newData
         notifyDataSetChanged()
     }

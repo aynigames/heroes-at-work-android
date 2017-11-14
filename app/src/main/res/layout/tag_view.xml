@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dashed_border_black"
+    android:layout_margin="@dimen/heroes_margin_quarter">
+
+    <TextView
+        android:id="@+id/tag_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DUMMY"
+        android:layout_centerVertical="true"/>
+
+    <ImageView
+        android:id="@+id/tag_delete_button"
+        android:layout_toRightOf="@id/tag_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/ic_menu_delete"
+        android:layout_centerVertical="true"/>
+
+</RelativeLayout>
