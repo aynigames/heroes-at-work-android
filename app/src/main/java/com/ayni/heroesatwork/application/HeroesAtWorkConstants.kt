@@ -12,7 +12,7 @@ object HeroesAtWorkConstants {
 
 
     val BROADCAST_MESSAGE = "BROADCAST_MESSAGE"
-    val EVENT_SNACKBAR = "EVENT_SNACKBAR"
+    val EVENT_SNACK_BAR = "EVENT_SNACK_BAR"
 
 
     val DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss"

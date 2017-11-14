@@ -11,7 +11,7 @@ import com.ayni.heroesatwork.R
 import com.ayni.heroesatwork.application.inflate
 import com.ayni.heroesatwork.views.listeners.OnTagDeletedListener
 
-class TagsAdapter(private var mDataset: List<String>?, private var mOnTagDeletedListener: OnTagDeletedListener): RecyclerView.Adapter<TagsAdapter.TagViewHolder>() {
+class TagsAdapter(private var mTags: List<String>, private var mOnTagDeletedListener: OnTagDeletedListener): RecyclerView.Adapter<TagsAdapter.TagViewHolder>() {
 
     class TagViewHolder(itemView: View, private var onTagDeletedListener: OnTagDeletedListener) : RecyclerView.ViewHolder(itemView) {
 
@@ -35,14 +35,14 @@ class TagsAdapter(private var mDataset: List<String>?, private var mOnTagDeleted
             TagViewHolder(parent.inflate(R.layout.tag_view), mOnTagDeletedListener)
 
     override fun onBindViewHolder(holder: TagViewHolder, position: Int) {
-        holder.bind(mDataset!![position])
+        holder.bind(mTags[position])
     }
 
-    override fun getItemCount(): Int = if (mDataset != null) mDataset!!.size else 0
+    override fun getItemCount(): Int = mTags.size
 
 
-    fun swap(newData: List<String>?) {
-        mDataset = newData
+    fun swap(newData: List<String>) {
+        mTags = newData
         notifyDataSetChanged()
     }
 

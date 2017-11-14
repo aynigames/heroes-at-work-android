@@ -16,8 +16,6 @@ import com.ayni.heroesatwork.views.adapters.CurrentGamesAdapter
 import com.ayni.heroesatwork.views.adapters.OldGamesAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import android.support.v7.widget.DividerItemDecoration
-import com.ayni.heroesatwork.views.components.NonScrollableLinearLayoutManager
 
 
 class GameListActivity : AppCompatActivity() {
@@ -31,7 +29,7 @@ class GameListActivity : AppCompatActivity() {
     @BindView(R.id.old_games_recycler_view)
     lateinit var mOldGamesRecyclerView: RecyclerView
 
-    lateinit var gameViewModel : GameViewModel
+    private lateinit var gameViewModel : GameViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,19 +57,19 @@ class GameListActivity : AppCompatActivity() {
         loadGames()
     }
 
-    fun loadGames() {
+    private fun loadGames() {
         gameViewModel.getCurrentGames().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         { games -> (mCurrentGamesRecyclerView.adapter as CurrentGamesAdapter).swap(games) },
-                        { _ -> Toast.makeText(this@GameListActivity, "There was an error retriving your games.", Toast.LENGTH_LONG).show() }
+                        { _ -> Toast.makeText(this@GameListActivity, "There was an error obtaining your games.", Toast.LENGTH_LONG).show() }
                 )
 
         gameViewModel.getOldGames().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         { games -> (mOldGamesRecyclerView.adapter as OldGamesAdapter).swap(games) },
-                        { _ -> Toast.makeText(this@GameListActivity, "There was an error retriving your games.", Toast.LENGTH_LONG).show() }
+                        { _ -> Toast.makeText(this@GameListActivity, "There was an error obtaining your games.", Toast.LENGTH_LONG).show() }
                 )
     }
 }

@@ -36,7 +36,7 @@ class GameCreateActivity : AppCompatActivity(), OnTagDeletedListener, OnHeroDele
     @BindView(R.id.game_name_edit)
     lateinit var mGameNameEdit: EditText
 
-    @BindView(R.id.game_points_seekbar)
+    @BindView(R.id.game_points_seek_bar)
     lateinit var mGamePointsSeekBar: SeekBar
 
     @BindView(R.id.game_points_text)

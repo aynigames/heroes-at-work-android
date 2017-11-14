@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_light"
@@ -10,7 +9,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:baselineAligned="false">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -23,7 +23,7 @@
                 android:id="@+id/textView8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Remaining"
+                android:text="@string/remaining"
                 android:textAlignment="center"
                 android:textAppearance="@android:style/TextAppearance.Material.Medium"
                 android:textColor="@color/title_light" />
@@ -48,7 +48,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/remaining_text"
                     android:layout_centerHorizontal="true"
-                    android:text="points"
+                    android:text="@string/points"
                     android:layout_marginTop="-8dp"/>
 
             </RelativeLayout>
@@ -67,7 +67,7 @@
                 android:id="@+id/textView9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Current Score"
+                android:text="@string/current_score"
                 android:textAlignment="center"
                 android:textAppearance="@android:style/TextAppearance.Material.Medium"
                 android:textColor="@color/title_light" />
@@ -92,7 +92,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/current_score_text"
                     android:layout_centerHorizontal="true"
-                    android:text="points"
+                    android:text="@string/points"
                     android:layout_marginTop="-8dp"/>
 
             </RelativeLayout>
@@ -110,7 +110,7 @@
                 android:id="@+id/textView10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Date"
+                android:text="@string/date"
                 android:textAlignment="center"
                 android:textAppearance="@android:style/TextAppearance.Material.Medium"
                 android:textColor="@color/title_light" />
@@ -135,7 +135,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/days_left_text"
                     android:layout_centerHorizontal="true"
-                    android:text="days left"
+                    android:text="@string/days_left"
                     android:layout_marginTop="-8dp"/>
 
             </RelativeLayout>
@@ -147,7 +147,7 @@
         android:id="@+id/textView11"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Heroes"
+        android:text="@string/heroes"
         android:textColor="@color/title_light"
         android:padding="@dimen/heroes_margin"
 

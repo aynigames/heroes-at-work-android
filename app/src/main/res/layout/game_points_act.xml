@@ -30,7 +30,7 @@
             android:layout_below="@id/current_score_text"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="-8dp"
-            android:text="points" />
+            android:text="@string/points" />
 
     </RelativeLayout>
 
@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/title_light"
         android:layout_margin="@dimen/heroes_margin"
-        android:text="Points given by"
+        android:text="@string/points_given_by"
         android:textAppearance="@android:style/TextAppearance.Material.Medium" />
 
     <android.support.v7.widget.RecyclerView

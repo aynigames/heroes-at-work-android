@@ -1,7 +1,7 @@
 package com.ayni.heroesatwork.application
 
+import android.annotation.SuppressLint
 import android.support.v7.app.AppCompatActivity
 
-open class HeroesAtWorkActivity: AppCompatActivity() {
-
-}
+@SuppressLint("Registered")
+open class HeroesAtWorkActivity: AppCompatActivity()

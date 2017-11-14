@@ -9,7 +9,7 @@ import io.reactivex.Flowable
 
 class MemberViewModel : ViewModel() {
 
-    val memberRepository : MemberRepository = MemberRepositoryImpl()
+    private val memberRepository : MemberRepository = MemberRepositoryImpl()
 
     fun authenticate(email: String): Flowable<Member> {
         return memberRepository.authenticate(email)

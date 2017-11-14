@@ -76,7 +76,7 @@
                     android:textColor="@color/title_light" />
 
                 <SeekBar
-                    android:id="@+id/game_points_seekbar"
+                    android:id="@+id/game_points_seek_bar"
                     android:layout_below="@id/points_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

@@ -26,15 +26,13 @@ class LoginActivity : HeroesAtWorkActivity() {
     lateinit var passwordEditText : EditText
 
 
-    lateinit var memberViewModel : MemberViewModel
+    private lateinit var memberViewModel : MemberViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         requestWindowFeature(Window.FEATURE_NO_TITLE)
-        val sab = supportActionBar
-        if (sab != null)
-            sab.hide()
+        supportActionBar?.hide()
 
         setContentView(R.layout.login_act)
 

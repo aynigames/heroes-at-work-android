@@ -1,7 +1,6 @@
 package com.ayni.heroesatwork.repositories
 
 import com.ayni.heroesatwork.application.HeroesAtWorkConstants
-import com.ayni.heroesatwork.application.HeroesAtWorkRetrofit
 import com.ayni.heroesatwork.application.PreferenceHelper
 import com.ayni.heroesatwork.di.DaggerDiComponent
 import com.ayni.heroesatwork.models.Game
@@ -9,7 +8,7 @@ import com.ayni.heroesatwork.repositories.service.GameService
 import io.reactivex.Flowable
 import javax.inject.Inject
 
-class GameRepositoryImpl() : GameRepository {
+class GameRepositoryImpl : GameRepository {
 
     @Inject
     lateinit var gameService: GameService

@@ -3,13 +3,11 @@ package com.ayni.heroesatwork.application
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import java.util.*
 
 inline fun <reified T : Any> Activity.launchActivity(requestCode: Int = -1, options: Bundle? = null, noinline init: Intent.() -> Unit = {}) {
 
@@ -33,9 +31,9 @@ fun ViewGroup.inflate(layoutRes: Int): View {
 
 
 fun Activity.hideSoftKeyboard() {
-    if (getCurrentFocus() != null) {
+    if (currentFocus != null) {
         val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0)
+        inputMethodManager.hideSoftInputFromWindow(currentFocus.windowToken, 0)
     }
 }
 

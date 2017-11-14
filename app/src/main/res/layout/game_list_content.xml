@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -16,7 +15,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="In Progress"
+            android:text="@string/in_progress"
             android:textColor="@color/title_light"
             android:layout_marginStart="@dimen/heroes_margin"
             android:layout_marginEnd="@dimen/heroes_margin"
@@ -34,7 +33,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="History"
+            android:text="@string/history"
             android:layout_marginTop="@dimen/heroes_margin"
             android:layout_marginStart="@dimen/heroes_margin"
             android:layout_marginEnd="@dimen/heroes_margin"

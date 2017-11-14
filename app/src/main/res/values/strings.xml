@@ -21,5 +21,18 @@
     <string name="end_date">End Date</string>
     <string name="points_per_hero">Points Per Hero</string>
     <string name="_200">200</string>
+    <string name="remaining">Remaining</string>
+    <string name="in_progress">In Progress</string>
+    <string name="history">History</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="create_account">Create account</string>
+    <string name="points">points</string>
+    <string name="current_score">Current Score</string>
+    <string name="date">Date</string>
+    <string name="days_left">days left</string>
+    <string name="points_given_by">Points given by</string>
+    <string name="login_with_facebook">Login with Facebook</string>
 
 </resources>

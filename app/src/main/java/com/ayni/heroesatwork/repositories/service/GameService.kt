@@ -11,10 +11,10 @@ import retrofit2.http.Query
 
 interface GameService {
     @GET("games?status=start")
-    fun getCurrentGames(@Query("memberid")memberid: Int): Flowable<List<Game>>
+    fun getCurrentGames(@Query("memberId") memberId: Int): Flowable<List<Game>>
 
     @GET("games?status=end")
-    fun getOldGames(@Query("memberid")memberid: Int): Flowable<List<Game>>
+    fun getOldGames(@Query("memberId") memberId: Int): Flowable<List<Game>>
 
     @POST("games")
     fun saveGame(game: Game): Flowable<Game>

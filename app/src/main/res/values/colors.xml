@@ -14,7 +14,7 @@
     <color name="heroes_white">#FFFFFF</color>
 
 
-    <color name="action_bar_light"></color>
+    <color name="action_bar_light">@color/heroes_blue</color>
     <color name="background_dark">@color/heroes_blue</color>
     <color name="background_light">@color/heroes_light_gray</color>
     <color name="background_card">@color/heroes_white</color>

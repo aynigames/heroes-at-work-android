@@ -1,21 +1,18 @@
 package com.ayni.heroesatwork.mock
 
-import com.ayni.heroesatwork.application.DateUtils
 import com.ayni.heroesatwork.models.Game
 import com.ayni.heroesatwork.models.Member
 import com.ayni.heroesatwork.repositories.service.GameService
 import io.reactivex.Flowable
-import java.util.Date
+
+class MockGameService : GameService {
 
 
-class MockGameService() : GameService {
-
-
-    override fun getCurrentGames(memberid: Int): Flowable<List<Game>> {
+    override fun getCurrentGames(memberId: Int): Flowable<List<Game>> {
         return Flowable.fromArray(MockEntities.currentGames)
     }
 
-    override fun getOldGames(memberid: Int): Flowable<List<Game>> {
+    override fun getOldGames(memberId: Int): Flowable<List<Game>> {
         return Flowable.fromArray(MockEntities.oldGames)
     }
 

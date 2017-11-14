@@ -58,7 +58,7 @@ class HeroSearchActivity : AppCompatActivity(), OnHeroSelectedListener {
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
                                 { heroes -> (mHeroesRecyclerView.adapter as HeroesAdapter).swap(heroes) },
-                                { _ -> Toast.makeText(this@HeroSearchActivity, "There was an error retriving the players.", Toast.LENGTH_LONG).show() }
+                                { _ -> Toast.makeText(this@HeroSearchActivity, "There was an error obtaining the players.", Toast.LENGTH_LONG).show() }
                         )
             }
         }, 1000)

@@ -1,6 +1,5 @@
 package com.ayni.heroesatwork.views.adapters
 
-import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +16,7 @@ import com.ayni.heroesatwork.views.activities.GameDetailActivity
 import java.text.SimpleDateFormat
 import java.util.*
 
-class CurrentGamesAdapter (private var mDataset: List<Game>): RecyclerView.Adapter<CurrentGamesAdapter.CurrentGameViewHolder>() {
+class CurrentGamesAdapter (private var mGames: List<Game>): RecyclerView.Adapter<CurrentGamesAdapter.CurrentGameViewHolder>() {
 
     class CurrentGameViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -56,14 +55,14 @@ class CurrentGamesAdapter (private var mDataset: List<Game>): RecyclerView.Adapt
             CurrentGameViewHolder(parent.inflate(R.layout.current_game_view))
 
     override fun onBindViewHolder(holder: CurrentGameViewHolder, position: Int) {
-        holder.bind(mDataset[position])
+        holder.bind(mGames[position])
     }
 
-    override fun getItemCount(): Int = mDataset.size
+    override fun getItemCount(): Int = mGames.size
 
 
     fun swap(newData: List<Game>) {
-        mDataset = newData
+        mGames = newData
         notifyDataSetChanged()
     }
 }

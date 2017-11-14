@@ -8,8 +8,6 @@ import com.ayni.heroesatwork.repositories.service.MemberService
 import dagger.Module
 import dagger.Provides
 
-class
-
 open class HeroesAtWorkModuleProd {
     fun provideGameService() : GameService {
         return HeroesAtWorkRetrofit.instance.create(GameService::class.java)
@@ -30,7 +28,7 @@ open class HeroesAtWorkModuleDev {
 }
 
 @Module
-class HeroesAtWorkModule() {
+class HeroesAtWorkModule {
 
     companion object {
         val module = HeroesAtWorkModuleDev()

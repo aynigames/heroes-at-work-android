@@ -1,6 +1,5 @@
 package com.ayni.heroesatwork.repositories.service
 
-import com.ayni.heroesatwork.models.Game
 import com.ayni.heroesatwork.models.Member
 import com.ayni.heroesatwork.models.Player
 import io.reactivex.Flowable

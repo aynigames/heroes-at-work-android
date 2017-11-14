@@ -1,6 +1,5 @@
 package com.ayni.heroesatwork.views.adapters
 
-import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +17,7 @@ import com.ayni.heroesatwork.models.Game
 import com.ayni.heroesatwork.views.activities.GameDetailActivity
 import java.text.SimpleDateFormat
 
-class OldGamesAdapter (private var mDataset: List<Game>): RecyclerView.Adapter<OldGamesAdapter.OldGameViewHolder>() {
+class OldGamesAdapter (private var mGames: List<Game>): RecyclerView.Adapter<OldGamesAdapter.OldGameViewHolder>() {
 
     class OldGameViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -46,7 +45,7 @@ class OldGamesAdapter (private var mDataset: List<Game>): RecyclerView.Adapter<O
         @BindView(R.id.main_hero_score_progress_bar)
         lateinit var mainHeroPointsProgressBar: RoundCornerProgressBar
 
-        fun bind(game: Game, listener: (Context, Game) -> Unit) = with(itemView) {
+        fun bind(game: Game) = with(itemView) {
             nameTextView.text = game.name
 
             val startDateSetting = game.getSetting(HeroesAtWorkConstants.SETTING_START_DATE)
@@ -77,7 +76,7 @@ class OldGamesAdapter (private var mDataset: List<Game>): RecyclerView.Adapter<O
             //TODO: Heroes Faces
 
 
-            setOnClickListener { listener(context, game) }
+            setOnClickListener { View.OnClickListener { context.launchActivity<GameDetailActivity> { } } }
         }
 
         init {
@@ -88,20 +87,15 @@ class OldGamesAdapter (private var mDataset: List<Game>): RecyclerView.Adapter<O
             OldGameViewHolder(parent.inflate(R.layout.old_game_view))
 
     override fun onBindViewHolder(holder: OldGameViewHolder, position: Int) {
-        holder.bind(mDataset[position], listener)
+        holder.bind(mGames[position])
     }
 
-    override fun getItemCount(): Int = mDataset.size
+    override fun getItemCount(): Int = mGames.size
 
 
     fun swap(newData: List<Game>) {
-        mDataset = newData
+        mGames = newData
         notifyDataSetChanged()
     }
 
-    object listener : (Context, Game) -> Unit {
-        override fun invoke(context: Context, game: Game) {
-            context.launchActivity<GameDetailActivity> {  }
-        }
-    }
 }

@@ -15,7 +15,7 @@ import com.ayni.heroesatwork.views.listeners.OnHeroDeletedListener
 import com.ayni.heroesatwork.views.listeners.OnHeroSelectedListener
 
 class HeroesAdapter(
-        private var mDataset: List<Player>,
+        private var mHeroes: List<Player>,
         private var mOnHeroDeletedListener: OnHeroDeletedListener?,
         private var mOnHeroSelectedListener: OnHeroSelectedListener?): RecyclerView.Adapter<HeroesAdapter.HeroViewHolder>() {
 
@@ -64,14 +64,14 @@ class HeroesAdapter(
             HeroViewHolder(parent.inflate(R.layout.hero_search_view), mOnHeroDeletedListener, mOnHeroSelectedListener)
 
     override fun onBindViewHolder(holder: HeroViewHolder, position: Int) {
-        holder.bind(mDataset[position])
+        holder.bind(mHeroes[position])
     }
 
-    override fun getItemCount(): Int = mDataset.size
+    override fun getItemCount(): Int = mHeroes.size
 
 
     fun swap(newData: List<Player>) {
-        mDataset = newData
+        mHeroes = newData
         notifyDataSetChanged()
     }
 

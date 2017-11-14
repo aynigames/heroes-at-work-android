@@ -8,7 +8,7 @@ import io.reactivex.Flowable
 
 class GameViewModel : ViewModel() {
 
-    val gameRepository : GameRepository = GameRepositoryImpl()
+    private val gameRepository : GameRepository = GameRepositoryImpl()
 
     fun getCurrentGames(): Flowable<List<Game>> {
         return gameRepository.getCurrentGames()
