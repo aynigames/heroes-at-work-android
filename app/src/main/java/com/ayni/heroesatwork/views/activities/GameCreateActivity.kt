@@ -1,5 +1,6 @@
 package com.ayni.heroesatwork.views.activities
 
+import android.app.DatePickerDialog
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
@@ -8,15 +9,12 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.FrameLayout
-import android.widget.SeekBar
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
 import com.ayni.heroesatwork.R
+import com.ayni.heroesatwork.application.DateUtils
 import com.ayni.heroesatwork.application.HeroesAtWorkConstants
 import com.ayni.heroesatwork.application.hideSoftKeyboard
 import com.ayni.heroesatwork.application.launchActivity
@@ -24,17 +22,27 @@ import com.ayni.heroesatwork.models.Game
 import com.ayni.heroesatwork.models.Player
 import com.ayni.heroesatwork.views.adapters.HeroesAdapter
 import com.ayni.heroesatwork.views.adapters.TagsAdapter
+import com.ayni.heroesatwork.views.components.DatePickerFragment
 import com.ayni.heroesatwork.views.listeners.OnHeroDeletedListener
 import com.ayni.heroesatwork.views.listeners.OnTagDeletedListener
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
+import com.google.android.flexbox.JustifyContent
 import com.google.gson.Gson
+import java.text.SimpleDateFormat
+import java.util.*
 
 
-class GameCreateActivity : AppCompatActivity(), OnTagDeletedListener, OnHeroDeletedListener {
+class GameCreateActivity : AppCompatActivity(), OnTagDeletedListener, OnHeroDeletedListener, DatePickerDialog.OnDateSetListener {
 
     @BindView(R.id.game_name_edit)
     lateinit var mGameNameEdit: EditText
+
+    @BindView(R.id.game_start_date_text)
+    lateinit var mGameStartDateText : TextView
+
+    @BindView(R.id.game_end_date_text)
+    lateinit var mGameEndDateText : TextView
 
     @BindView(R.id.game_points_seek_bar)
     lateinit var mGamePointsSeekBar: SeekBar
@@ -48,6 +56,8 @@ class GameCreateActivity : AppCompatActivity(), OnTagDeletedListener, OnHeroDele
     @BindView(R.id.heroes_recycler_view)
     lateinit var mHeroesRecyclerView: RecyclerView
 
+    private var mGameStartDate: Date = DateUtils.getTodayStartOfDay()
+    private var mGameEndDate: Date = DateUtils.getTodayEndOfDay()
     private var mTagList = mutableListOf<String>()
     private var mHeroList = mutableListOf<Player>()
 
@@ -57,10 +67,12 @@ class GameCreateActivity : AppCompatActivity(), OnTagDeletedListener, OnHeroDele
 
         ButterKnife.bind(this)
 
+        updateDateDisplays()
+
         mTagsRecyclerView.setHasFixedSize(true)
         val layoutManager = FlexboxLayoutManager(this@GameCreateActivity)
         layoutManager.flexDirection = FlexDirection.ROW
-        //layoutManager.justifyContent = JustifyContent.FLEX_START
+        layoutManager.justifyContent = JustifyContent.FLEX_END
         mTagsRecyclerView.layoutManager = layoutManager
         mTagsRecyclerView.adapter = TagsAdapter(mTagList, this@GameCreateActivity)
 
@@ -79,27 +91,6 @@ class GameCreateActivity : AppCompatActivity(), OnTagDeletedListener, OnHeroDele
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
             }
         })
-    }
-
-    @OnClick(R.id.hero_add_button)
-    internal fun onHeroAddClick() {
-        launchActivity<HeroSearchActivity>(HeroesAtWorkConstants.HERO_SEARCH_REQUEST_CODE) {  }
-    }
-
-    @OnClick(R.id.game_create_button)
-    internal fun onGameCreateClick() {
-        val game = Game()
-        game.name = mGameNameEdit.text.toString()
-
-        if (game.name == "") {
-            Toast.makeText(this@GameCreateActivity, "Please fill the game name", Toast.LENGTH_LONG).show()
-            return
-        }
-
-        if (mTagList.count() == 0) {
-            //TODO: ask if sure to create without tags
-        }
-        finish()
     }
 
     @OnClick(R.id.tag_add_button)
@@ -150,9 +141,9 @@ class GameCreateActivity : AppCompatActivity(), OnTagDeletedListener, OnHeroDele
         mTagsRecyclerView.adapter.notifyDataSetChanged()
     }
 
-    override fun onHeroDeleted(hero: Player) {
-        mHeroList.remove(hero)
-        mHeroesRecyclerView.adapter.notifyDataSetChanged()
+    @OnClick(R.id.hero_add_button)
+    internal fun onHeroAddClick() {
+        launchActivity<HeroSearchActivity>(HeroesAtWorkConstants.HERO_SEARCH_REQUEST_CODE) {  }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -170,4 +161,49 @@ class GameCreateActivity : AppCompatActivity(), OnTagDeletedListener, OnHeroDele
         }
     }
 
+    override fun onHeroDeleted(hero: Player) {
+        mHeroList.remove(hero)
+        mHeroesRecyclerView.adapter.notifyDataSetChanged()
+    }
+
+    @OnClick(R.id.game_end_date_text)
+    fun onEndDateClick() {
+        val dialogFragment = DatePickerFragment()
+
+        val arguments = Bundle()
+        arguments.putLong(HeroesAtWorkConstants.MIN_DATE_KEY, DateUtils.getTodayStartOfDay().time)
+        arguments.putLong(HeroesAtWorkConstants.SELECTED_DATE_KEY, DateUtils.getEndOfDay(mGameEndDate).time)
+        dialogFragment.arguments = arguments
+
+        dialogFragment.show(supportFragmentManager, "datePicker")
+    }
+
+    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+        val calendar = Calendar.getInstance()
+        calendar.set(year, month, dayOfMonth, 23, 59, 59)
+        mGameEndDate = calendar.time
+        updateDateDisplays()
+    }
+
+    fun updateDateDisplays() {
+        val sdf = SimpleDateFormat("dd/MM/yyyy")
+        mGameStartDateText.text = sdf.format(mGameStartDate)
+        mGameEndDateText.text = sdf.format(mGameEndDate)
+    }
+
+    @OnClick(R.id.game_create_button)
+    internal fun onGameCreateClick() {
+        val game = Game()
+        game.name = mGameNameEdit.text.toString()
+
+        if (game.name == "") {
+            Toast.makeText(this@GameCreateActivity, "Please fill the game name", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        if (mTagList.count() == 0) {
+            //TODO: ask if sure to create without tags
+        }
+        finish()
+    }
 }

@@ -5,6 +5,14 @@ import java.util.*
 
 class DateUtils {
     companion object {
+        fun getTodayStartOfDay() : Date {
+            return getStartOfDay(Date())
+        }
+
+        fun getTodayEndOfDay() : Date {
+            return getEndOfDay(Date())
+        }
+
         fun getStartOfDay(date: Date) : Date {
             val calendar = GregorianCalendar()
             calendar.time = date

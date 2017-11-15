@@ -25,4 +25,6 @@ object HeroesAtWorkConstants {
     // Intent Keys
     val HERO_SEARCH_REQUEST_CODE = 1
     val HERO_SELECTED_BUNDLE_KEY = "HERO_SELECTED_BUNDLE_KEY"
+    val MIN_DATE_KEY: String = "MIN_DATE_KEY"
+    val SELECTED_DATE_KEY: String = "SELECTED_DATE_KEY"
 }

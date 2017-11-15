@@ -31,23 +31,48 @@
                     android:hint="@string/game_name"
                     android:inputType="text" />
 
-                <EditText
-                    android:id="@+id/game_initial_date_edit"
+                <TextView
+                    android:id="@+id/game_start_date_title"
                     android:layout_below="@+id/game_name_edit"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="@string/start_date"
-                    android:inputType="date" />
+                    android:layout_marginTop="@dimen/heroes_margin"
+                    android:text="@string/start_date"
+                    android:layout_alignParentStart="true"
+                    android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                    android:textColor="@color/title_light"/>
 
-                <EditText
-                    android:id="@+id/game_end_date_edit"
-                    android:layout_below="@id/game_initial_date_edit"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/game_start_date_text"
+                    android:layout_below="@+id/game_name_edit"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="@string/end_date"
-                    android:inputType="date" />
+                    android:layout_marginTop="@dimen/heroes_margin"
+                    android:text="@string/not_set"
+                    android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                    android:layout_alignParentEnd="true"/>
+
+                <TextView
+                    android:id="@+id/game_end_date_title"
+                    android:layout_below="@id/game_start_date_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/heroes_margin"
+                    android:text="@string/end_date"
+                    android:layout_alignParentStart="true"
+                    android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                    android:textColor="@color/title_light"/>
+
+                <TextView
+                    android:id="@+id/game_end_date_text"
+                    android:layout_below="@+id/game_start_date_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/heroes_margin"
+                    android:text="@string/not_set"
+                    android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                    android:layout_alignParentEnd="true"/>
+
             </RelativeLayout>
 
             <RelativeLayout

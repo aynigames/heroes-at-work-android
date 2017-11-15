@@ -34,5 +34,6 @@
     <string name="days_left">days left</string>
     <string name="points_given_by">Points given by</string>
     <string name="login_with_facebook">Login with Facebook</string>
+    <string name="not_set">Not Set</string>
 
 </resources>
