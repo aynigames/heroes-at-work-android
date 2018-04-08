@@ -1,6 +1,7 @@
 package com.ayni.heroesatwork.views.activities
 
 import android.app.DatePickerDialog
+import android.arch.lifecycle.ViewModelProviders
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
@@ -20,15 +21,16 @@ import com.ayni.heroesatwork.application.hideSoftKeyboard
 import com.ayni.heroesatwork.application.launchActivity
 import com.ayni.heroesatwork.models.Game
 import com.ayni.heroesatwork.models.Player
-import com.ayni.heroesatwork.views.adapters.HeroesAdapter
+import com.ayni.heroesatwork.viewmodels.GameViewModel
+import com.ayni.heroesatwork.views.adapters.HeroesSearchAdapter
 import com.ayni.heroesatwork.views.adapters.TagsAdapter
 import com.ayni.heroesatwork.views.components.DatePickerFragment
 import com.ayni.heroesatwork.views.listeners.OnHeroDeletedListener
 import com.ayni.heroesatwork.views.listeners.OnTagDeletedListener
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
-import com.google.android.flexbox.JustifyContent
 import com.google.gson.Gson
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -61,24 +63,27 @@ class GameCreateActivity : AppCompatActivity(), OnTagDeletedListener, OnHeroDele
     private var mTagList = mutableListOf<String>()
     private var mHeroList = mutableListOf<Player>()
 
+    private lateinit var gameViewModel : GameViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.game_create_act)
 
         ButterKnife.bind(this)
 
+        gameViewModel = ViewModelProviders.of(this).get(GameViewModel::class.java)
+
         updateDateDisplays()
 
         mTagsRecyclerView.setHasFixedSize(true)
         val layoutManager = FlexboxLayoutManager(this@GameCreateActivity)
         layoutManager.flexDirection = FlexDirection.ROW
-        layoutManager.justifyContent = JustifyContent.FLEX_END
         mTagsRecyclerView.layoutManager = layoutManager
         mTagsRecyclerView.adapter = TagsAdapter(mTagList, this@GameCreateActivity)
 
         mHeroesRecyclerView.setHasFixedSize(true)
         mHeroesRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        mHeroesRecyclerView.adapter = HeroesAdapter(mHeroList, this@GameCreateActivity, null)
+        mHeroesRecyclerView.adapter = HeroesSearchAdapter(mHeroList, this@GameCreateActivity, null)
 
         mGamePointsSeekBar.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
@@ -111,7 +116,7 @@ class GameCreateActivity : AppCompatActivity(), OnTagDeletedListener, OnHeroDele
         with(alertDialog) {
             setTitle("Add Tag")
             setView(container)
-            setPositiveButton("YES",
+            setPositiveButton("Add",
                 DialogInterface.OnClickListener { dialog, _ ->
                     val tag = input.text.toString()
                     if (tag == "") {
@@ -127,7 +132,7 @@ class GameCreateActivity : AppCompatActivity(), OnTagDeletedListener, OnHeroDele
                     dialog!!.cancel()
                     this@GameCreateActivity.hideSoftKeyboard()
                 })
-            setNegativeButton("NO"
+            setNegativeButton("Cancel"
             ) { dialog, _ ->
                 dialog?.cancel()
             }
@@ -185,25 +190,59 @@ class GameCreateActivity : AppCompatActivity(), OnTagDeletedListener, OnHeroDele
         updateDateDisplays()
     }
 
-    fun updateDateDisplays() {
-        val sdf = SimpleDateFormat("dd/MM/yyyy")
+    private fun updateDateDisplays() {
+
+        val sdf = DateFormat.getDateInstance()
         mGameStartDateText.text = sdf.format(mGameStartDate)
         mGameEndDateText.text = sdf.format(mGameEndDate)
     }
 
     @OnClick(R.id.game_create_button)
     internal fun onGameCreateClick() {
-        val game = Game()
-        game.name = mGameNameEdit.text.toString()
+        val gameName = mGameNameEdit.text.toString()
 
-        if (game.name == "") {
+        if (gameName == "") {
             Toast.makeText(this@GameCreateActivity, "Please fill the game name", Toast.LENGTH_LONG).show()
             return
         }
 
-        if (mTagList.count() == 0) {
-            //TODO: ask if sure to create without tags
+        if (mHeroList.count() == 0) {
+            Toast.makeText(this@GameCreateActivity, "Please add some Heroes to the game", Toast.LENGTH_LONG).show()
+            return
         }
+
+        if (mTagList.count() == 0) {
+            val builder = AlertDialog.Builder(this)
+            builder.setMessage("Are you sure you want to create the game without tags?")
+                    .setPositiveButton("YES", { dialog, _ ->
+                        createGame()
+                        dialog.cancel()
+                    })
+                    .setNegativeButton("NO", { dialog, _ ->
+                        dialog.cancel()
+                    })
+            val alertDialog = builder.create()
+            alertDialog.show()
+        }
+        else {
+            createGame()
+        }
+
+    }
+
+    private fun createGame() {
+        val gameName = mGameNameEdit.text.toString()
+
+        val game = Game()
+        game.name = gameName
+        val sdf = SimpleDateFormat(HeroesAtWorkConstants.DATE_FORMAT)
+        game.putSetting(HeroesAtWorkConstants.SETTING_START_DATE, sdf.format(mGameStartDate))
+        game.putSetting(HeroesAtWorkConstants.SETTING_END_DATE, sdf.format(mGameEndDate))
+        game.putSetting(HeroesAtWorkConstants.SETTING_TAGS, mTagList.joinToString(separator = "|", transform = { t -> t }))
+        game.putSetting(HeroesAtWorkConstants.SETTING_POINTS_PER_HERO, mGamePointsSeekBar.progress.toString())
+
+        gameViewModel.createGame(game)
+
         finish()
     }
 }

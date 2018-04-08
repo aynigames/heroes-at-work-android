@@ -15,10 +15,10 @@ class Game() {
     lateinit var startedOn: Date
     lateinit var endedOn: Date
     private lateinit var players: List<Player>
-    private lateinit var settings: List<Setting>
-    private lateinit var leaderBoard: LeaderBoard
+    private var settings = mutableListOf<Setting>()
+    lateinit var leaderBoard: LeaderBoard
 
-    constructor(gameId: Int, name: String, status: String, players: List<Player>, settings: List<Setting>, leaderBoard: LeaderBoard): this() {
+    constructor(gameId: Int, name: String, status: String, players: List<Player>, settings: MutableList<Setting>, leaderBoard: LeaderBoard): this() {
         this.gameId = gameId
         this.name = name
         this.status = status
@@ -37,5 +37,19 @@ class Game() {
 
     fun getTopPlayer(): Player? {
         return leaderBoard.players.maxBy { player -> player.playerScore }
+    }
+
+    fun putSetting(key: String, value: String) {
+        var setting  = settings.find { s -> s.key == key }
+        if (setting == null) {
+            settings.add(Setting(key, value))
+        }
+        else {
+            setting.value = value
+        }
+    }
+
+    fun getMaxScore() : Float? {
+        return leaderBoard.players.map { p -> p.playerScore }.max()
     }
 }

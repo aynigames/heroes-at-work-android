@@ -20,11 +20,16 @@ object HeroesAtWorkConstants {
     // Game Settings
     val SETTING_START_DATE = "Start Date"
     val SETTING_END_DATE = "End Date"
+    val SETTING_TAGS = "Tags"
+    val SETTING_POINTS_PER_HERO = "Points per Hero"
 
 
     // Intent Keys
     val HERO_SEARCH_REQUEST_CODE = 1
+
     val HERO_SELECTED_BUNDLE_KEY = "HERO_SELECTED_BUNDLE_KEY"
+    val GAME_SELECTED_BUNDLE_KEY = "HERO_SELECTED_BUNDLE_KEY"
+
     val MIN_DATE_KEY: String = "MIN_DATE_KEY"
     val SELECTED_DATE_KEY: String = "SELECTED_DATE_KEY"
 }

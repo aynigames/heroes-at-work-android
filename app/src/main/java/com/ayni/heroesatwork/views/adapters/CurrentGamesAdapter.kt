@@ -1,5 +1,6 @@
 package com.ayni.heroesatwork.views.adapters
 
+import android.os.Bundle
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import com.ayni.heroesatwork.application.inflate
 import com.ayni.heroesatwork.application.launchActivity
 import com.ayni.heroesatwork.models.Game
 import com.ayni.heroesatwork.views.activities.GameDetailActivity
+import com.google.gson.Gson
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -44,7 +46,12 @@ class CurrentGamesAdapter (private var mGames: List<Game>): RecyclerView.Adapter
             //TODO: Heroes faces
 
 
-            itemView.setOnClickListener { context.launchActivity<GameDetailActivity> {  } }
+            itemView.setOnClickListener {
+                val bundle = Bundle()
+                val gameJson = Gson().toJson(game)
+                bundle.putString(HeroesAtWorkConstants.GAME_SELECTED_BUNDLE_KEY, gameJson)
+                context.launchActivity<GameDetailActivity>(options = bundle) {  }
+            }
         }
 
         init {

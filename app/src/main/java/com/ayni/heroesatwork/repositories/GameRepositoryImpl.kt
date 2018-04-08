@@ -23,6 +23,10 @@ class GameRepositoryImpl : GameRepository {
         return gameService.getOldGames(memberId)
     }
 
+    override fun createGame(game: Game): Flowable<Game> {
+        return gameService.createGame(game)
+    }
+
     init {
         DaggerDiComponent.builder().build().inject(this)
     }

@@ -20,7 +20,6 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/remaining"
@@ -40,7 +39,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:text="30"
                     android:textSize="40sp" />
                 
                 <TextView
@@ -64,7 +62,6 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/current_score"
@@ -84,7 +81,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:text="180"
                     android:textSize="40sp" />
 
                 <TextView
@@ -107,7 +103,6 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/date"
@@ -127,15 +122,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:text="3"
                     android:textSize="40sp" />
 
                 <TextView
+                    android:id="@+id/days_left_subtitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/days_left_text"
                     android:layout_centerHorizontal="true"
-                    android:text="@string/days_left"
                     android:layout_marginTop="-8dp"/>
 
             </RelativeLayout>
@@ -154,6 +148,7 @@
         android:textAppearance="@android:style/TextAppearance.Material.Medium"/>
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/heroes_recycler_view"
         android:paddingStart="@dimen/heroes_margin"
         android:paddingEnd="@dimen/heroes_margin"
         android:layout_width="match_parent"

@@ -14,10 +14,10 @@ import com.ayni.heroesatwork.models.Player
 import com.ayni.heroesatwork.views.listeners.OnHeroDeletedListener
 import com.ayni.heroesatwork.views.listeners.OnHeroSelectedListener
 
-class HeroesAdapter(
+class HeroesSearchAdapter(
         private var mHeroes: List<Player>,
         private var mOnHeroDeletedListener: OnHeroDeletedListener?,
-        private var mOnHeroSelectedListener: OnHeroSelectedListener?): RecyclerView.Adapter<HeroesAdapter.HeroViewHolder>() {
+        private var mOnHeroSelectedListener: OnHeroSelectedListener?): RecyclerView.Adapter<HeroesSearchAdapter.HeroViewHolder>() {
 
     class HeroViewHolder(
             itemView: View,

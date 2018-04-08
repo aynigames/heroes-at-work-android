@@ -17,7 +17,7 @@ interface GameService {
     fun getOldGames(@Query("memberId") memberId: Int): Flowable<List<Game>>
 
     @POST("games")
-    fun saveGame(game: Game): Flowable<Game>
+    fun createGame(game: Game): Flowable<Game>
 
     @GET("members")
     fun searchMembers(@Query("text")text : String): Flowable<List<Member>>

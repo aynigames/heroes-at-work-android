@@ -6,6 +6,7 @@ import io.reactivex.Flowable
 interface GameRepository {
     fun getCurrentGames(): Flowable<List<Game>>
     fun getOldGames(): Flowable<List<Game>>
+    fun createGame(game: Game): Flowable<Game>
 }
 
 

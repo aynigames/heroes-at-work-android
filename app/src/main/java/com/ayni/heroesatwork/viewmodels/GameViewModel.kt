@@ -17,4 +17,8 @@ class GameViewModel : ViewModel() {
     fun getOldGames(): Flowable<List<Game>> {
         return gameRepository.getOldGames()
     }
+
+    fun createGame(game: Game): Flowable<Game> {
+        return gameRepository.createGame(game)
+    }
 }

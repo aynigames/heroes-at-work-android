@@ -14,6 +14,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders = [auth0Domain: "@string/com_auth0_domain", auth0Scheme: "https"]
     }
     buildTypes {
         release {
@@ -71,6 +72,9 @@ dependencies {
     //ProgressBar
     compile "com.akexorcist:RoundCornerProgressBar:2.0.3"
 
-    compile 'com.google.android:flexbox:0.3.1'
+    //auth0
+    compile "com.auth0.android:auth0:1.12.1"
+
+    compile "com.google.android:flexbox:0.3.1"
 
 }

@@ -36,4 +36,7 @@
     <string name="login_with_facebook">Login with Facebook</string>
     <string name="not_set">Not Set</string>
 
+    <string name="com_auth0_client_id">13PXKi0ltwBeaf0NU42Zi2HL9lEvqZKT</string>
+    <string name="com_auth0_domain">aynilab.auth0.com</string>
+
 </resources>

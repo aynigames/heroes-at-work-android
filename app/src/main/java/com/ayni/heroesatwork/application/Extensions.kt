@@ -19,7 +19,10 @@ inline fun <reified T : Any> Activity.launchActivity(requestCode: Int = -1, opti
 inline fun <reified T : Any> Context.launchActivity(options: Bundle? = null, noinline init: Intent.() -> Unit = {}) {
     val intent = newIntent<T>(this)
     intent.init()
-    startActivity(intent, options)
+    if (options != null) {
+        intent.putExtras(options)
+    }
+    startActivity(intent)
 }
 
 inline fun <reified T : Any> newIntent(context: Context): Intent =

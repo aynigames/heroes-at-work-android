@@ -16,7 +16,7 @@ import com.ayni.heroesatwork.R
 import com.ayni.heroesatwork.application.HeroesAtWorkConstants
 import com.ayni.heroesatwork.models.Player
 import com.ayni.heroesatwork.viewmodels.MemberViewModel
-import com.ayni.heroesatwork.views.adapters.HeroesAdapter
+import com.ayni.heroesatwork.views.adapters.HeroesSearchAdapter
 import com.ayni.heroesatwork.views.listeners.OnHeroSelectedListener
 import com.google.gson.Gson
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -45,7 +45,7 @@ class HeroSearchActivity : AppCompatActivity(), OnHeroSelectedListener {
 
         mHeroesRecyclerView.setHasFixedSize(true)
         mHeroesRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        mHeroesRecyclerView.adapter = HeroesAdapter(emptyList(), null, this@HeroSearchActivity)
+        mHeroesRecyclerView.adapter = HeroesSearchAdapter(emptyList(), null, this@HeroSearchActivity)
     }
 
     @OnTextChanged(value = R.id.hero_search_edit, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
@@ -57,7 +57,7 @@ class HeroSearchActivity : AppCompatActivity(), OnHeroSelectedListener {
                 memberViewModel.searchPlayers(text).subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
-                                { heroes -> (mHeroesRecyclerView.adapter as HeroesAdapter).swap(heroes) },
+                                { heroes -> (mHeroesRecyclerView.adapter as HeroesSearchAdapter).swap(heroes) },
                                 { _ -> Toast.makeText(this@HeroSearchActivity, "There was an error obtaining the players.", Toast.LENGTH_LONG).show() }
                         )
             }

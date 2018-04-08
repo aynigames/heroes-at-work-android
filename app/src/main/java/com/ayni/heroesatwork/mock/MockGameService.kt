@@ -16,7 +16,7 @@ class MockGameService : GameService {
         return Flowable.fromArray(MockEntities.oldGames)
     }
 
-    override fun saveGame(game: Game): Flowable<Game> {
+    override fun createGame(game: Game): Flowable<Game> {
         MockEntities.currentGames.add(game)
         return Flowable.just(game)
     }

@@ -11,8 +11,9 @@ class MockEntities {
         private val todayStart = DateUtils.getStartOfDay(today)
         var todayEnd = DateUtils.getEndOfDay(today)
         private val setting1 = Setting(HeroesAtWorkConstants.SETTING_START_DATE, "2017-11-12T00:00:00")
-        private val setting2 = Setting(HeroesAtWorkConstants.SETTING_END_DATE, "2017-11-15T23:59:59")
-        private val settings = listOf(setting1, setting2)
+        private val setting2 = Setting(HeroesAtWorkConstants.SETTING_END_DATE, "2017-11-18T23:59:59")
+        private val setting3 = Setting(HeroesAtWorkConstants.SETTING_POINTS_PER_HERO, "200")
+        private val settings = mutableListOf(setting1, setting2, setting3)
 
         private val dummyProfilePic = "http://www.tripurainfo.com/Matrimonials/Photos/DummyWoman.jpg"
         private val player1 = Player(1, 1, 1, "Miguel", "Koo", dummyProfilePic, "miguel@aynilab.com", 120.0f, 20.0f)
